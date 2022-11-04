@@ -1,0 +1,13 @@
+[package]
+name = "sqlite-base64"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sqlite3-loadable = {path="../rust-sqlite-exts/sqlite3-loadable"}
+sqlite3ext-sys = {path="../rust-sqlite-exts/sqlite3ext-sys"}
+base64 = "0.13.0"
+
+[lib]
+crate-type=["rlib", "cdylib"]
+name="basesixfour0"
