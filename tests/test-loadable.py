@@ -58,8 +58,8 @@ class TestBase64(unittest.TestCase):
   def test_base64_decode(self):
     base64_decode = lambda content: db.execute("select base64_decode(?)", [content]).fetchone()[0]
     self.assertEqual(base64_decode('YWxleA=='), 'alex')
-    with self.assertRaisesRegex(sqlite3.OperationalError, "Unexpected null value"):
-      base64_decode(None)
+    #with self.assertRaisesRegex(sqlite3.OperationalError, "Unexpected null value"):
+    #  base64_decode(None)
 
     with self.assertRaisesRegex(sqlite3.OperationalError, "error decoding: Invalid byte 32, offset 3."):
       base64_decode("not base64") 

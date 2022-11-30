@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-sqlite3-loadable = {path="../rust-sqlite-exts/sqlite3-loadable"}
-sqlite3ext-sys = {path="../rust-sqlite-exts/sqlite3ext-sys"}
+sqlite-loadable = "0.0.1"
 base64 = "0.13.0"
 
 [lib]
