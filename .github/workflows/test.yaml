@@ -23,12 +23,12 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --examples --verbose
+      - run: cargo build --release --verbose
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-ubuntu
-          path: target/release/libbasesixfour.so
+          path: target/release/libbasesixfour0.so
   test-macos:
     name: Testing macos-latest
     runs-on: macos-latest
@@ -46,13 +46,13 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --examples --verbose
+      - run: cargo build --release --verbose
       #- run: make test
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-macos
-          path: target/release/libbasesixfour.dylib
+          path: target/release/libbasesixfour0.dylib
   test-windows:
     name: Testing windows-latest
     runs-on: windows-latest
@@ -70,10 +70,10 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --examples --verbose
+      - run: cargo build --release --verbose
       #- run: make test
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-windows
-          path: target/release/basesixfour.dll
+          path: target/release/basesixfour0.dll
