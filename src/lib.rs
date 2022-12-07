@@ -22,7 +22,7 @@ Source: {}
     Ok(())
 }
 
-/// base64_decode()
+/// base64_decode(data)
 pub fn base64_decode(context: *mut sqlite3_context, values: &[*mut sqlite3_value]) -> Result<()> {
     let contents = api::value_text(
         values
@@ -45,6 +45,7 @@ pub fn base64_encode(context: *mut sqlite3_context, values: &[*mut sqlite3_value
             ,
     )?;
     let res = base64::encode(contents.as_bytes());
+    //base64::encode_config_slice(input, config, output)
     api::result_text(context, &res)?;
     Ok(())
 }
