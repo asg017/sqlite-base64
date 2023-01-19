@@ -23,12 +23,12 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --verbose
+      - run: make loadable
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-ubuntu
-          path: target/release/libbasesixfour0.so
+          path: dist/debug/basesixfour0.so
   test-macos:
     name: Testing macos-latest
     runs-on: macos-latest
@@ -46,13 +46,38 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --verbose
+      - run: make loadable
       #- run: make test
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-macos
-          path: target/release/libbasesixfour0.dylib
+          path: dist/debug/basesixfour0.dylib
+  test-macos-arm:
+    name: Testing macos-latest with arm
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: rustup target add aarch64-apple-darwin
+      - run: make target=aarch64-apple-darwin loadable
+      #- run: make test
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sqlite-regex-macos-arm
+          path: dist/debug/regex0.dylib
   test-windows:
     name: Testing windows-latest
     runs-on: windows-latest
@@ -70,10 +95,10 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release --verbose
+      - run: make loadable
       #- run: make test
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-base64-windows
-          path: target/release/basesixfour0.dll
+          path: dist/debug/basesixfour0.dll
